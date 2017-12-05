@@ -5,6 +5,8 @@
  */
 package ils;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -20,8 +22,22 @@ public class FileReader {
         
     }
     
-    private int read_file(String file_name){
-        return -1;
+    private int read_file(String file_name) throws IOException{
+        BufferedReader br = new BufferedReader(new FileReader(file_name));
+        try {
+            StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
+
+            while (line != null) {
+                sb.append(line);
+                sb.append(System.lineSeparator());
+                line = br.readLine();
+            }
+            String everything = sb.toString();
+        } finally {
+            br.close();
+        }
+        return 0;
     }
     
     /* FILE EXAMPLE
