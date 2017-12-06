@@ -22,6 +22,13 @@ public class Node {
         this.score = score;
     }
 
+    public Node(String label, double x, double y) {
+        this.label = label;
+        this.x = x;
+        this.y = y;
+    }
+    
+
     public String getLabel() {
         return label;
     }
@@ -37,5 +44,11 @@ public class Node {
     public double getY() {
         return y;
     }
+
+    public void setScore(double score) {
+        this.score = score;
+    }
+    
+    
 
 }

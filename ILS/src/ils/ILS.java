@@ -6,6 +6,7 @@
 package ils;
 
 import static java.lang.Math.sqrt;
+import java.io.IOException;
 
 /**
  *
@@ -16,9 +17,10 @@ public class ILS {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // TODO code application logic here
         
+        Problem p = new ProblemFileReader().read_file("/home/mzboito/Downloads/instances/a8.oplib");
         
         // imagino que algum lugar aqui le os arquivos
         String str = new String();
