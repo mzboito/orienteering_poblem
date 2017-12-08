@@ -28,11 +28,11 @@ s.t. c4:
 	sum{i in NODES: i != v0} x[i,v0] = 1; #(chega em v0)
 
 #restrição 3: fazer um caminho entre os nodos da solução
-s.t. c5{v in NODES: v != v0}:
-	sum{i in NODES: i!=v} X[i,v] <= 1; #(vai ter no máximo uma aresta chegando em todo v que está na solução)
+s.t. c5{n in NODES: n != v0}:
+	sum{i in NODES: i!=n} x[i,n] <= 1; #(vai ter no máximo uma aresta chegando em todo v que está na solução)
 
-s.t. c6{v in NODES: v != v0}:
-	sum{j in NODES: j != v} X[v,j] <= 1; #(vai ter no máximo uma aresta saindo de todo v que está na solução)
+s.t. c6{n in NODES: n != v0}:
+	sum{j in NODES: j != n} x[n,j] <= 1; #(vai ter no máximo uma aresta saindo de todo v que está na solução)
 
 #restrição 4: não pode ser maior que o custo máximo
 s.t. c7:
