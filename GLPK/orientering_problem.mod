@@ -45,7 +45,7 @@ s.t. c8:
 s.t. c9{i in NODES: i!= 1}:
 	2 <= u[i] <= DIMENSION;
 
-s.t. c10{i in NODES: i != 1, j in NODES: j!= 1}:
+s.t. c10{i in NODES, j in NODES: j!= 1 and i != 1}:
 	u[i] - u[j] + 1 <= (DIMENSION - 1)* (1 - x[i,j]);
 
 end;
