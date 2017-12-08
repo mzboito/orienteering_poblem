@@ -1,8 +1,9 @@
 data;
-set N := 0 1;
+set NODES := 0 1;
 param v0 := 1;
 param COST_LIMIT := 1000000 ;
-param score := 100 200 ;
+param score := 0 100
+1 200 ;
 param d : 0 1 :=
 0 0 199
 1 200 0;
