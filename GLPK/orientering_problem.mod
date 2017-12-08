@@ -9,7 +9,7 @@ param a{i in NODES, j in 	NODES}; #Aij, número de arestas que ligam o vértice 
 
 var v{i in NODES}, binary; #Vn, conjunto de vértices que pertencem à rota da solução, binária
 var x{i in NODES, j in NODES}, binary; #variavel binaria de presença no conjunto solução
-var u{i in NODES}, binary; #Ui ordem do nodo i na rota
+var u{i in NODES}; #Ui ordem do nodo i na rota
 
 maximize obj: sum{i in NODES} score[i]*v[i];
 
@@ -40,12 +40,12 @@ s.t. c7:
 
 #restrição 5: excluir rotas desconexas (MTZ)
 s.t. c8:
-	u[1] = 1;
+	u[v0] = 1;
 
-s.t. c9{i in NODES: i!= 1}:
+s.t. c9{i in NODES: i!= v0}:
 	2 <= u[i] <= DIMENSION;
 
-s.t. c10{i in NODES, j in NODES: j!= 1 and i != 1}:
+s.t. c10{i in NODES, j in NODES: j!= v0 and i != v0}:
 	u[i] - u[j] + 1 <= (DIMENSION - 1)* (1 - x[i,j]);
 
 end;
