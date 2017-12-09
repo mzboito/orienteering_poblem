@@ -43,7 +43,6 @@ public class Solver {
         }
         this.s = bestLocal;
         
-        //TODO SOLUTION A ORDEM DAS CONEXÕES a[i,j]
     }
     
     
@@ -51,22 +50,74 @@ public class Solver {
         return bestLocal;
     }
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     // Perturba a bestSolution encontrada removendo n nodos da solução
     public Solution perturbSolution(Solution bestLocal) { //remove uma quantidade N de nós da solução randomicamente e cola a solução
         
         //gerar o numero de coisas pra remover
+        int N = 15 * p.dimension / 100;
+        System.out.printf("dimension %d e N %d\n", p.dimension, N);
+        
         //pegar indices aleatorios
+        Random generator = new Random(seed);
+        int max = bestLocal.prob_dimension;
+        int min = 0;
+        int randomNum; 
+        
+        N = 10;
+        while(N > 0){
+            randomNum = generator.nextInt((max - min) + 1) + min; //generates a number
+            //System.out.printf("dimension %d e N %d rand num %d \n", p.dimension, N, randomNum);
+            //int link = bestLocal.getEdge(randomNum); // (randomNum, link) são uma edge, se tirar randomNum tem que achar oq aponta pra ele pra ligar com link
+            N--;
+        }
         //criar uma nova solucao removendo os indices aleatorios
         
-        Random generator = new Random(seed);
+        
         // nextInt is normally exclusive of the top value,
         // so add 1 to make it inclusive
-        //int max = bestLocal.nodeList.size();
-        int min = 0;
-        //int randomNum = generator.nextInt((max - min) + 1) + min; //generates a number
         
         
-        return null;
+        
+        return bestLocal;
     }
 
     public void writeSolution(String output) {

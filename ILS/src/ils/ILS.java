@@ -62,7 +62,7 @@ public class ILS {
         //debuggerPrint(p);
 
         Solver ils = new Solver(p, seed, maxSteps);
-        //ils.exec();
+        ils.exec();
         //ils.writeSolution(output);
         
     }
