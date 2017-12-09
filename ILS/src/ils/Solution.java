@@ -127,4 +127,14 @@ public class Solution {
         int connectedNode = edges[nodeLabel];
         return connectedNode;
     }
+    
+    int getFreeNodesNumber(){
+        int count = 0;
+        for(int i=1; i < prob_dimension; i++){
+            if(edges[i] == -1){
+                count++;
+            }
+        }
+        return count;
+    }
 }

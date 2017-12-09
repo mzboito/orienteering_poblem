@@ -71,14 +71,15 @@ public class Solver {
                 }while(!alreadyInserted);
                 
                 int nodeNum2 = bestLocal.verifyConectedNode(nodeNum1);
-                double euclDist = p.getEuclDist(nodeNum1, nodeNum2);
-                double newCost = bestLocal.getTotalCost() - euclDist; // tira o custo das arestas que não vão mais se conectar
+                double oldc = p.getEuclDist(nodeNum1, nodeNum2);
+                double newc = p.getEuclDist(nodeToInsert, nodeNum1) + p.getEuclDist(nodeToInsert, nodeNum2);
+                double newCost = bestLocal.getTotalCost() - oldc + newc; // tira o custo das arestas que não vão mais se conectar
                 
-                if(p.getEuclDist(nodeToInsert, nodeNum1) + p.getEuclDist(nodeToInsert, nodeNum2) <= bestLocal.totalCost){
-                    bestLocal.removeEdge(nodeNum1);
-                    bestLocal.removeEdge(nodeNum2);
-                    bestLocal.addEdge(nodeToInsert, nodeNum1);
-                    bestLocal.addEdge(nodeToInsert, nodeNum1);
+                if(newCost <= bestLocal.totalCost){ //(node1, node2)
+                    bestLocal.removeEdge(nodeNum1); //remove edge[node1] = node2
+                    //bestLocal.removeEdge(nodeNum2);
+                    bestLocal.addEdge(nodeNum1, nodeToInsert); //create edge[node1] = nodeToInsert
+                    bestLocal.addEdge(nodeToInsert, nodeNum2); //create edge[nodeToInsert] = node2 
                     bestLocal.updateScore(p.getScoreList());
                     bestLocal.updateCost(p.euclDist);
                 }
