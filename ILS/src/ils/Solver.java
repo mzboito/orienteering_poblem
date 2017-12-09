@@ -65,11 +65,11 @@ public class Solver {
             int nodeToInsert = generator1.nextInt(p.nodes.size()) + 1;
             //Node nodeToInsert = p.getNode(Integer.toString(randNum1));
             
-            if(!(bestLocal.edgeAlreadyInserted(nodeToInsert, alreadyInserted))){ // não foi inserido ainda
+            if(!(bestLocal.edgeAlreadyInserted(nodeToInsert))){ // não foi inserido ainda
                 while(!alreadyInserted){
                     Random generator2 = new Random(seed); //onde vai ser inserido
                     nodeNum1 = generator2.nextInt(p.nodes.size()) + 1;
-                    alreadyInserted = bestLocal.edgeAlreadyInserted(nodeToInsert, alreadyInserted);
+                    alreadyInserted = bestLocal.edgeAlreadyInserted(nodeToInsert);
                 }
                 
                 int nodeNum2 = s.verifyConectedNode(nodeNum1);
@@ -100,7 +100,7 @@ public class Solver {
         //pegar indices aleatorios
         Random generator = new Random(seed);
         int max = bestLocal.prob_dimension;
-        int min = 0;
+        int min = 1;
         int randomNum; 
         
         //N = 3;
@@ -112,27 +112,29 @@ public class Solver {
         while(N > 0){
             randomNum = generator.nextInt((max - min) + 1) + min; //generates a number
             //System.out.printf("Entering with rand num %d \n", randomNum);
-            int edges[] = bestLocal.edges;
-            int a1 = -1;
-            int a2 = edges[randomNum];
-            if(bestLocal.startingSolution()){
-                a1 = Integer.parseInt(p.starting_node);
-            }else{
-                for(int i=1; i < bestLocal.prob_dimension; i++){
-                if(edges[i] == randomNum){
-                    a1 = i;
+            if(randomNum != Integer.parseInt(p.starting_node)){
+                int edges[] = bestLocal.edges;
+                int a1 = -1;
+                int a2 = edges[randomNum];
+                if(bestLocal.startingSolution()){
+                    a1 = Integer.parseInt(p.starting_node);
+                }else{
+                    for(int i=1; i < bestLocal.prob_dimension; i++){
+                    if(edges[i] == randomNum){
+                        a1 = i;
+                    }
+                   }
                 }
-               }
-            }
-            if((a2 != -1)&&(a1 != -1)){
-                //System.out.printf("(%d,%d)\n", a1,a2);
-                //System.out.println("old edge");
-                bestLocal.print_edges();
-                bestLocal.removeEdge(randomNum);
-                bestLocal.addEdge(a1, a2); //fix the route
-                //System.out.println("new edge");
-                bestLocal.print_edges();
-            }
+                if((a2 != -1)&&(a1 != -1)){
+                    //System.out.printf("(%d,%d)\n", a1,a2);
+                    //System.out.println("old edge");
+                    bestLocal.print_edges();
+                    bestLocal.removeEdge(randomNum);
+                    bestLocal.addEdge(a1, a2); //fix the route
+                    //System.out.println("new edge");
+                    bestLocal.print_edges();
+                    }
+                }
             N--;
         }
         bestLocal.updateCost(p.euclDist);

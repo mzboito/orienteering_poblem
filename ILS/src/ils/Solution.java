@@ -78,7 +78,8 @@ public class Solution {
         this.totalScore = newScore;
     }
     
-    boolean edgeAlreadyInserted(int randNum, boolean alreadyInserted){
+    boolean edgeAlreadyInserted(int randNum){
+        boolean alreadyInserted;
         if(this.edges[randNum] != -1)
             alreadyInserted = true;
         else
