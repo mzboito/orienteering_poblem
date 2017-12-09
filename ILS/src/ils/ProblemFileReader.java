@@ -62,6 +62,10 @@ public class ProblemFileReader {
              if(lines.get(i).startsWith("NODE_SCORE_SECTION")){
                 coord_flag = false;
                 score_flag = true;
+                //System.out.println("entrei");
+                coord_flag = false;
+                score_flag = true;
+                //System.out.println("entrei");
             }else{  
             if(coord_flag){ //1 140 145
                 String name = lines.get(i).split(" ")[0];
@@ -76,6 +80,7 @@ public class ProblemFileReader {
                 depot_flag = true;  
             }else{    
             if(score_flag){ //2 36
+                //System.out.println("entrei");
                 String label = lines.get(i).split(" ")[0];
                 double score = Double.parseDouble(lines.get(i).split(" ")[1]);
                 Node n = p.getNode(label);

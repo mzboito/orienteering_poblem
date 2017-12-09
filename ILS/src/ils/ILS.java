@@ -44,7 +44,11 @@ public class ILS {
     
     public static void main(String[] args) throws IOException {
 
-        //get from user path and seed 
+        //get from user path and seed
+        /*for(String s: args){
+            System.out.println(s);
+        }*/
+        
         String path = args[0];
         path = "C:/Ble/UFRGS/CIC/5SEMESTRE/Otimização/instances/a8.oplib";
         int seed = Integer.parseInt(args[1]);
@@ -52,6 +56,9 @@ public class ILS {
         System.out.print(output);
         int maxSteps = Integer.parseInt(args[3]);
         System.out.println(maxSteps);
+        //System.out.println(path);
+        
+        //path = "/home/mzboito/Documents/orienteering_poblem/ILS/dist/ILS.jar";
         
         //get problem
         Problem p = new ProblemFileReader().read_file(path);
@@ -63,4 +70,6 @@ public class ILS {
         //ils.exec();
         //ils.writeSolution(output);   
     } 
+        //ils.exec();
+        //ils.writeSolution(output);
 }

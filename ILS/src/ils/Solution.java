@@ -18,7 +18,6 @@ public class Solution {
     double totalScore;
     
     public Solution() {
-        
         this.nodeList = new ArrayList();
         this.totalCost = 0.0;
         this.totalScore = 0.0;        
@@ -46,6 +45,12 @@ public class Solution {
 
     public double getTotalScore() {
         return totalScore;
+    }
+    
+    public void setTrivialSolution(Node n) {
+        this.nodeList.add(n);
+        this.totalCost = 0;
+        this.totalScore = n.getScore();
     }
     
 }
