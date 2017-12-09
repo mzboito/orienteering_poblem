@@ -50,34 +50,21 @@ public class ILS {
         
         // imagino que algum lugar aqui le os arquivos
         Solution best = new Solution();
-        ILS ils = new ILS();
-        //best = ils.iteratedSearch(nodes);      
+        ILS ils = new ILS();     
     }
     
     // busca local iterada
     public Solution iteratedSearch(ArrayList<Node> nodes)
     {
+        Solution bestSolution = new Solution();
         int maxIt = 100;
         int maxImprov = 50;
         
         auxNodes.add(nodes.get(0));
         
         // bestSolution inicial deve ser vazia para ser atualizada
-        Solution bestSolution = new Solution();
-        Solution auxSolution = new Solution();
-        
-        /* LEMBRAR: O CUSTO É A DISTANCIA ENTRE AS ARESTAS, NÃO O SCORE */
-        //auxSolution.nodeList = randomInitialSol(nodes);
-        System.out.println("\n\n");
-        for(Node node : bestSolution.getNodeList()){
-            System.out.printf("%s     ", node.getLabel());
-            System.out.printf("x: %.0f", node.getX());
-            System.out.printf("  y: %.0f\n", node.getY());
-        }
-        
-        
+           
         //seta como melhor solução o primeiro nodo da auxSolution
-        // não vai ser o primeiro nodo de entrada porque a auxSolution foi embaralhada
         bestSolution.nodeList.add(auxSolution.nodeList.get(0));
         
         while(maxIt > 0){
@@ -102,45 +89,6 @@ public class ILS {
     public Solution perturbSolution(Solution bestLocal)
     {
         return bestLocal;
-    }
-    
-    // Pega um solução inicial aleatoria
-    public Solution randomInitialSol(Solution sol, ArrayList<Node> nodes)
-    {
-        Random gerador = new Random();
-        int random;
-        Boolean repeat = false;
-        ArrayList<Node> usedNodes = new ArrayList();
-        ArrayList<Node> shuffledNodes = new ArrayList();
-        
-        /*
-        // array auxiliar pra trocar
-        for(int i=0; i<nodes.size(); i++){
-            auxArray.add(i, nodes.get(i));
-            shuffledNodes.add(i, nodes.get(i));
-        }
-        
-        // cria lista aleatória
-        for(int i=0; i<nodes.size(); i++){
-            random = gerador.nextInt(nodes.size());
-            auxArray.set(i, shuffledNodes.get(i));
-            shuffledNodes.set(i, shuffledNodes.get(random));
-            shuffledNodes.set(random, auxArray.get(i));
-        }
-        */
-        
-        usedNodes.add(0, nodes.get(0));
-        
-        for(int i=1; i<nodes.size(); i++){
-            
-        }
-        
-        
-        
-        
-        
-        
-        return sol;
     }
     
     // Perturba a bestSolution trocando 2 nodos de lugar (talvez mudar pra k-opt)
