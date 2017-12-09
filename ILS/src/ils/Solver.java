@@ -12,8 +12,6 @@ import java.util.ArrayList;
  * @author mzboito
  */
 public class Solver {
-    ArrayList<Node> usedNodes;
-    ArrayList<Node> auxNodes;
     Problem p;
     Solution s;
     int seed;
@@ -23,8 +21,6 @@ public class Solver {
         this.p = p;
         this.seed = seed;
         this.maxSteps = maxSteps;
-        this.usedNodes = usedNodes = new ArrayList();
-        this.auxNodes = new ArrayList();
         this.s = new Solution();
         Node n = p.getStarting_node();
         if(n != null){
@@ -32,57 +28,33 @@ public class Solver {
         }
     }
     
-    public void exec(){
+    public void exec(){ //here goes the logic
         
-        //here goes the logic
-        
-        
- 
-    }
-    
-    
-    
-    // busca local iterada
-    public Solution iteratedSearch(ArrayList<Node> nodes)
-    {
-        int maxIt = 100;
         int maxImprov = 50;
+        int maxIt = this.maxSteps;
         
-        auxNodes.add(nodes.get(0));
-        
-
-        Solution bestSolution = new Solution();
-        Solution auxSolution = new Solution();
-        
-        bestSolution.nodeList.add(nodes.get(0));
+        Solution bestLocal = s;
         
         while(maxIt > 0){
-            
-            //local search
-            // perturbation
-            // accept
-            
+            Solution newSol = localSearch(bestLocal,maxImprov);
+            bestLocal = perturbSolution(newSol);
             maxIt--;
         }
+        this.s = bestLocal;
         
-        return bestSolution;
+        //TODO SOLUTION A ORDEM DAS CONEXÕES a[i,j]
     }
     
+    
     /* Tipo um hill clibing */
-    public Solution localSearch(Solution bestLocal, ArrayList<Node> nodes, int maxImprov)
-    {
+    public Solution localSearch(Solution bestLocal, int maxImprov)
+    { //adiciona n vezes, usa seed randomico pra adicionar nós, tenta maximizar o score e controlar o custo
         return bestLocal;
     }
     
     // Perturba a bestSolution encontrada removendo n nodos da solução
     public Solution perturbSolution(Solution bestLocal)
-    {
-        return bestLocal;
-    }
-
-    // Perturba a bestSolution trocando 2 nodos de lugar (talvez mudar pra k-opt)
-    public Solution twoOpt(Solution bestLocal)
-    {
+    { //remove uma quantidade N de nós da solução randomicamente e cola a solução
         return bestLocal;
     }
 
