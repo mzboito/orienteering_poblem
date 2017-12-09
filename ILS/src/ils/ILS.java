@@ -63,13 +63,9 @@ public class ILS {
         //get problem
         Problem p = new ProblemFileReader().read_file(path);
         //debuggerPrint(p);
-        System.out.println("\nta tudo ok aqui\n");
 
         Solver ils = new Solver(p, seed, maxSteps);
-        System.out.println("\ndepois do solver ils, ta tudo ok aqui\n");
-        //ils.exec();
+        ils.exec();
         //ils.writeSolution(output);   
     } 
-        //ils.exec();
-        //ils.writeSolution(output);
 }

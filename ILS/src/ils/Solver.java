@@ -39,6 +39,7 @@ public class Solver {
             Solution newSol = localSearch(bestLocal,maxImprov);
             bestLocal = perturbSolution(newSol);
             maxIt--;
+            //System.out.println(maxImprov + "\n");
         }
         this.s = bestLocal;
         
@@ -49,6 +50,14 @@ public class Solver {
     /* Tipo um hill clibing */
     public Solution localSearch(Solution bestLocal, int maxImprov)
     { //adiciona n vezes, usa seed randomico pra adicionar nós, tenta maximizar o score e controlar o custo
+        
+        while(maxImprov > 0){
+            
+            
+            
+            maxImprov--;
+        }
+        
         return bestLocal;
     }
     
