@@ -99,6 +99,7 @@ public class Solution {
                 }
             }
         }
+        this.totalCost = newCost;
     }
 
     boolean startingSolution() {
@@ -136,5 +137,18 @@ public class Solution {
             }
         }
         return count;
+    }
+
+    int[] getSolutionNodes() {
+        int size = prob_dimension -1 - getFreeNodesNumber();
+        int[] solNodes = new int[size];
+        int index = 0;
+        for(int i = 1; i < prob_dimension; i ++){
+            if(edges[i] != -1){
+                solNodes[index] = i;
+                index++;
+            }
+        }
+        return solNodes;
     }
 }

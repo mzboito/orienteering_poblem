@@ -31,7 +31,7 @@ public class Solver {
     
     public void exec(){ //here goes the logic
         
-        int maxImprov = 5;
+        int maxImprov = 50;
         int maxIt = this.maxSteps;
         
         Solution bestLocal = s;
@@ -40,16 +40,18 @@ public class Solver {
             System.out.println("Iteration number " + maxIt);
             Solution newSol = localSearch(bestLocal,maxImprov);
             bestLocal = acceptSolution(bestLocal, newSol);
-            bestLocal = perturbSolution(newSol);
+            bestLocal = perturbSolution(bestLocal);
             maxIt--;
             
         }
         this.s = bestLocal;
-        
+        System.out.println(s.totalScore);
+        s.updateCost(p.euclDist);
+        System.out.println(s.totalCost);
+        s.print_edges();
     }
     
     public Solution acceptSolution(Solution bestLocal, Solution newSol){
-        
         if(newSol.totalScore > bestLocal.totalScore){
             Random generator = new Random(seed);
             int chooseSol = generator.nextInt(100);
@@ -67,9 +69,9 @@ public class Solver {
         int size = bestLocal.getFreeNodesNumber();
         boolean alreadyInserted;
         while((maxImprov > 0)&&(size > 0)){
-            bestLocal.print_edges();
+            //bestLocal.print_edges();
             int nodeToInsert = generator.nextInt(p.nodes.size()) + 1; //pega um num random
-            System.out.println("Random number: " + nodeToInsert);
+            //System.out.println("Random number: " + nodeToInsert);
             //testa se já não tá sendo usado
             if(bestLocal.startingSolution()){ //só tem um nodo
                 //System.out.println("SOLUTION SIZE 1");
@@ -90,9 +92,11 @@ public class Solver {
             }else{
                  if(!(bestLocal.edgeAlreadyInserted(nodeToInsert))){ // senao
                     do{ //enquanto não achar
-                        nodeNum1 = generator.nextInt(p.nodes.size()) + 1; //cata um node
-                        alreadyInserted = bestLocal.edgeAlreadyInserted(nodeToInsert); //esse node tem que estar sendo usado!
-                        System.out.println(alreadyInserted);
+                        int nodesList[] = bestLocal.getSolutionNodes();
+                        int index = generator.nextInt(nodesList.length); //cata um node
+                        nodeNum1 = nodesList[index];
+                        alreadyInserted = bestLocal.edgeAlreadyInserted(nodeNum1); //esse node tem que estar sendo usado!
+                        //System.out.println(alreadyInserted);
                     }while(!alreadyInserted);
                     
                     int nodeNum2 = bestLocal.verifyConectedNode(nodeNum1);
@@ -122,7 +126,7 @@ public class Solver {
         
         //gerar o numero de coisas pra remover
         int N = 20 * p.dimension / 100;
-        System.out.printf("dimension %d e N %d\n", p.dimension, N);
+        //System.out.printf("dimension %d e N %d\n", p.dimension, N);
         
         //pegar indices aleatorios
         Random generator = new Random(seed);
