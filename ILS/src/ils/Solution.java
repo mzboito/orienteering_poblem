@@ -5,27 +5,43 @@
  */
 package ils;
 
+import java.util.List;
+import java.util.ArrayList;
+
 /**
  *
  * @author carol
  */
 public class Solution {
-    Node node;
+    ArrayList<Node> nodeList;
     double totalCost;
     double totalScore;
     
-    public Solution(Node node, double totalCost, double totalScore) {
-        this.node = node;
-        this.totalCost = totalCost;
-        this.totalScore = totalScore;
+    public Solution() {
+        
+        this.nodeList = new ArrayList();
+        this.totalCost = 0.0;
+        this.totalScore = 0.0;        
+    }
+    
+    public void addNodeToList(Node node){
+        this.nodeList.add(node);
     }
 
-    public Node getNode() {
-        return node;
+    public ArrayList<Node> getNodeList() {
+        return nodeList;
+    }
+    
+    public void updateTotalCost(double cost){
+        this.totalCost += cost;
     }
 
     public double getTotalCost() {
         return totalCost;
+    }
+    
+    public void updateTotalScore(double score){
+        this.totalScore += score;
     }
 
     public double getTotalScore() {

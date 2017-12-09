@@ -7,6 +7,8 @@ package ils;
 
 import static java.lang.Math.sqrt;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -17,37 +19,81 @@ public class ILS {
     /**
      * @param args the command line arguments
      */
+    ArrayList<Node> usedNodes = new ArrayList();
+    ArrayList<Node> auxNodes = new ArrayList();
+    
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
         
-        Problem p = new ProblemFileReader().read_file("/home/mzboito/Downloads/instances/a8.oplib");
+        //Problem p = new ProblemFileReader().read_file("/home/mzboito/Downloads/instances/a8.oplib");
+        Problem p = new ProblemFileReader().read_file("C:/Ble/instances/a8.oplib");
+        
+        ArrayList<Node> nodes = p.getNodes();
+        
+         /* Imprimir o que foi lido no arquivo referente ao node que é o que eu preciso */
+        for(Node node : nodes)
+        {
+            System.out.printf("%s     ", node.getLabel());
+            System.out.printf("x: %.0f", node.getX());
+            System.out.printf("  y: %.0f\n", node.getY());
+        }        
+         
+        System.out.printf("\nTamanho da matriz de distancias: %d", p.euclDist.length);
+        for(int i=0; i<=p.nodes.size(); i++){
+            System.out.println("\n");
+            //System.out.printf("%d: ", i);
+            for(int j=0; j<=p.nodes.size(); j++){
+                double dist = p.getEuclDist(i, j);
+                System.out.printf("%.0f  ", dist); 
+            }
+        }
         
         // imagino que algum lugar aqui le os arquivos
-        String str = new String();
-        Node node = new Node(str, 5.9, 5.6, 7.8);
-        
+        Solution best = new Solution();
+        ILS ils = new ILS();     
     }
     
-    public Solution initSearch(Node node)
+    // busca local iterada
+    public Solution iteratedSearch(ArrayList<Node> nodes)
     {
-        String emptyStr = "";
-        Node initNode = new Node(emptyStr, 0, 0, 0);
+        Solution bestSolution = new Solution();
+        int maxIt = 100;
+        int maxImprov = 50;
+        
+        auxNodes.add(nodes.get(0));
+        
         // bestSolution inicial deve ser vazia para ser atualizada
-        Solution bestSolution = new Solution(node, 0, 0);
+           
+        //seta como melhor solução o primeiro nodo da auxSolution
+        bestSolution.nodeList.add(auxSolution.nodeList.get(0));
+        
+        while(maxIt > 0){
+            
+            //local search
+            // perturbation
+            // accept
+            
+            maxIt--;
+        }
         
         return bestSolution;
     }
     
-    /* Coloquei como ta no read me, mas vou fazer testes e ver se é isso mesmo */
-    public double euclideanDistance(double x1, double x2, double y1, double y2)
+    /* Tipo um hill clibing */
+    public Solution localSearch(Solution bestLocal, ArrayList<Node> nodes, int maxImprov)
     {
-        double distance = 0.0;
-        
-        double xd = x1 - x2;
-        double yd = y1 - y2;
-        double dab = (int)(sqrt((xd*xd) + (yd*yd)) + 0.5);
-        
-        return distance;
+        return bestLocal;
     }
     
+    // Perturba a bestSolution encontrada removendo n nodos da solução
+    public Solution perturbSolution(Solution bestLocal)
+    {
+        return bestLocal;
+    }
+    
+    // Perturba a bestSolution trocando 2 nodos de lugar (talvez mudar pra k-opt)
+    public Solution twoOpt(Solution bestLocal)
+    {
+        return bestLocal;
+    }
 }
