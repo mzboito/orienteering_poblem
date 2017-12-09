@@ -118,5 +118,14 @@ public class Problem {
     public double getEuclDist(int i, int j){
         return this.euclDist[i][j];
     }
+
+    double[] getScoreList() {
+        double[] score = new double[this.dimension+1];
+        for(Node n : this.nodes){
+            int index = Integer.parseInt(n.getLabel());
+            score[index] = n.getScore();
+        }
+    return score;
+    }
         
 }

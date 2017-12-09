@@ -45,7 +45,6 @@ public class Solver {
         }
         this.s = bestLocal;
         
-        //TODO SOLUTION A ORDEM DAS CONEXÕES a[i,j]
     }
     
     public Solution acceptSolution(Solution bestLocal, Solution newSol){
@@ -82,18 +81,50 @@ public class Solver {
     public Solution perturbSolution(Solution bestLocal) { //remove uma quantidade N de nós da solução randomicamente e cola a solução
         
         //gerar o numero de coisas pra remover
+        int N = 20 * p.dimension / 100;
+        System.out.printf("dimension %d e N %d\n", p.dimension, N);
+        
         //pegar indices aleatorios
-        //criar uma nova solucao removendo os indices aleatorios
-        
         Random generator = new Random(seed);
-        // nextInt is normally exclusive of the top value,
-        // so add 1 to make it inclusive
-        //int max = bestLocal.nodeList.size();
+        int max = bestLocal.prob_dimension;
         int min = 0;
-        //int randomNum = generator.nextInt((max - min) + 1) + min; //generates a number
+        int randomNum; 
         
-        
-        return null;
+        //N = 3;
+        //bestLocal.addEdge(1, 3);
+        //bestLocal.addEdge(3, 7);
+        //bestLocal.addEdge(7, 5);
+        //bestLocal.addEdge(5, 1);
+        //criar uma nova solucao removendo os indices aleatorios
+        while(N > 0){
+            randomNum = generator.nextInt((max - min) + 1) + min; //generates a number
+            //System.out.printf("Entering with rand num %d \n", randomNum);
+            int edges[] = bestLocal.edges;
+            int a1 = -1;
+            int a2 = edges[randomNum];
+            if(bestLocal.startingSolution()){
+                a1 = Integer.parseInt(p.starting_node);
+            }else{
+                for(int i=1; i < bestLocal.prob_dimension; i++){
+                if(edges[i] == randomNum){
+                    a1 = i;
+                }
+               }
+            }
+            if((a2 != -1)&&(a1 != -1)){
+                //System.out.printf("(%d,%d)\n", a1,a2);
+                //System.out.println("old edge");
+                bestLocal.print_edges();
+                bestLocal.removeEdge(randomNum);
+                bestLocal.addEdge(a1, a2); //fix the route
+                //System.out.println("new edge");
+                bestLocal.print_edges();
+            }
+            N--;
+        }
+        bestLocal.updateCost(p.euclDist);
+        bestLocal.updateScore(p.getScoreList());
+        return bestLocal;
     }
 
     public void writeSolution(String output) {
