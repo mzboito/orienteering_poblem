@@ -31,17 +31,18 @@ public class Solver {
     
     public void exec(){ //here goes the logic
         
-        int maxImprov = 50;
+        int maxImprov = 5;
         int maxIt = this.maxSteps;
         
         Solution bestLocal = s;
         
         while(maxIt > 0){
+            System.out.println("Iteration number " + maxIt);
             Solution newSol = localSearch(bestLocal,maxImprov);
             bestLocal = acceptSolution(bestLocal, newSol);
             bestLocal = perturbSolution(newSol);
             maxIt--;
-            //System.out.println(maxImprov + "\n");
+            
         }
         this.s = bestLocal;
         
@@ -61,34 +62,53 @@ public class Solver {
     /* Tipo um hill clibing */
     public Solution localSearch(Solution bestLocal, int maxImprov){
     //adiciona n vezes, usa seed randomico pra adicionar nós, tenta maximizar o score e controlar o custo
-        Random generator1 = new Random(seed);
+        Random generator = new Random(seed);
         int nodeNum1;
         int size = bestLocal.getFreeNodesNumber();
         boolean alreadyInserted;
         while((maxImprov > 0)&&(size > 0)){
-            int nodeToInsert = generator1.nextInt(p.nodes.size()) + 1; //pega um num random
+            bestLocal.print_edges();
+            int nodeToInsert = generator.nextInt(p.nodes.size()) + 1; //pega um num random
+            System.out.println("Random number: " + nodeToInsert);
             //testa se já não tá sendo usado
-            if(!(bestLocal.edgeAlreadyInserted(nodeToInsert))){ // senao
-                do{ //enquanto não achar
-                    nodeNum1 = generator1.nextInt(p.nodes.size()) + 1; //cata um node
-                    alreadyInserted = bestLocal.edgeAlreadyInserted(nodeToInsert); //esse node tem que estar sendo usado!
-                }while(!alreadyInserted);
-                
-                int nodeNum2 = bestLocal.verifyConectedNode(nodeNum1);
-                double oldc = p.getEuclDist(nodeNum1, nodeNum2);
-                double newc = p.getEuclDist(nodeToInsert, nodeNum1) + p.getEuclDist(nodeToInsert, nodeNum2);
-                double newCost = bestLocal.getTotalCost() - oldc + newc; // tira o custo das arestas que não vão mais se conectar
-                
-                if(newCost <= bestLocal.totalCost){ //(node1, node2)
-                    bestLocal.removeEdge(nodeNum1); //remove edge[node1] = node2
-                    //bestLocal.removeEdge(nodeNum2);
-                    bestLocal.addEdge(nodeNum1, nodeToInsert); //create edge[node1] = nodeToInsert
-                    bestLocal.addEdge(nodeToInsert, nodeNum2); //create edge[nodeToInsert] = node2 
-                    bestLocal.updateScore(p.getScoreList());
-                    bestLocal.updateCost(p.euclDist);
+            if(bestLocal.startingSolution()){ //só tem um nodo
+                int starting_node = Integer.parseInt(p.starting_node);
+                if(nodeToInsert != starting_node){ //se o random não é o inicial
+                    double newc = p.getEuclDist(nodeToInsert, starting_node);
+                    if(newc < bestLocal.totalCost){ //se a edge não é maior que o custo
+                        bestLocal.addEdge(starting_node, nodeToInsert);
+                        bestLocal.addEdge(nodeToInsert, starting_node);
+                        bestLocal.updateScore(p.getScoreList());
+                        bestLocal.updateCost(p.euclDist);
+                        size = bestLocal.getFreeNodesNumber();
+                    }
+                    
                 }
-                size = bestLocal.getFreeNodesNumber();
+            }else{
+                 if(!(bestLocal.edgeAlreadyInserted(nodeToInsert))){ // senao
+                    do{ //enquanto não achar
+                        nodeNum1 = generator.nextInt(p.nodes.size()) + 1; //cata um node
+                        alreadyInserted = bestLocal.edgeAlreadyInserted(nodeToInsert); //esse node tem que estar sendo usado!
+                        System.out.println(alreadyInserted);
+                    }while(!alreadyInserted);
+
+                    int nodeNum2 = bestLocal.verifyConectedNode(nodeNum1);
+                    double oldc = p.getEuclDist(nodeNum1, nodeNum2);
+                    double newc = p.getEuclDist(nodeToInsert, nodeNum1) + p.getEuclDist(nodeToInsert, nodeNum2);
+                    double newCost = bestLocal.getTotalCost() - oldc + newc; // tira o custo das arestas que não vão mais se conectar
+
+                    if(newCost <= bestLocal.totalCost){ //(node1, node2)
+                        bestLocal.removeEdge(nodeNum1); //remove edge[node1] = node2
+                        //bestLocal.removeEdge(nodeNum2);
+                        bestLocal.addEdge(nodeNum1, nodeToInsert); //create edge[node1] = nodeToInsert
+                        bestLocal.addEdge(nodeToInsert, nodeNum2); //create edge[nodeToInsert] = node2 
+                        bestLocal.updateScore(p.getScoreList());
+                        bestLocal.updateCost(p.euclDist);
+                        size = bestLocal.getFreeNodesNumber();
+                    }
+                }
             }
+           
             
             maxImprov--;
         }
@@ -133,11 +153,11 @@ public class Solver {
                 if((a2 != -1)&&(a1 != -1)){
                     //System.out.printf("(%d,%d)\n", a1,a2);
                     //System.out.println("old edge");
-                    bestLocal.print_edges();
+                    //bestLocal.print_edges();
                     bestLocal.removeEdge(randomNum);
                     bestLocal.addEdge(a1, a2); //fix the route
                     //System.out.println("new edge");
-                    bestLocal.print_edges();
+                    //bestLocal.print_edges();
                     }
                 }
             N--;
