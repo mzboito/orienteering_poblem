@@ -105,9 +105,7 @@ public class ProblemFileReader {
                 p.addEuclDist(i, j, p.nodes.get(i-1).x, p.nodes.get(j-1).x, p.nodes.get(i-1).y, p.nodes.get(j-1).y);
             }
         }
-        
-        //System.out.println("\n");
-        
+
            return p;
     }
     

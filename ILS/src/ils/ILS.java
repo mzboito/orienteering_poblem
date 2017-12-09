@@ -22,10 +22,11 @@ public class ILS {
     ArrayList<Node> usedNodes = new ArrayList();
     ArrayList<Node> auxNodes = new ArrayList();
     Problem p;
-    int seed;
     
-    public void debuggerPrint(ArrayList<Node> nodes){
+    public void debuggerPrint(Problem p){
         /* Imprimir o que foi lido no arquivo referente ao node que é o que eu preciso */
+        ArrayList<Node> nodes = p.getNodes();
+        
         for(Node node : nodes)
         {
             System.out.printf("%s     ", node.getLabel());
@@ -46,17 +47,22 @@ public class ILS {
     
     public static void main(String[] args) throws IOException {
 
-        //get problem
-        Problem p = new ProblemFileReader().read_file("/home/mzboito/Documents/orienteering_poblem/instances/a8.oplib");
-        // Problem p = new ProblemFileReader().read_file("C:/Ble/instances/a8.oplib");
+        //get from user path and seed 
+        String path = args[0];
+        int seed = Integer.parseInt(args[1]);
+        //System.out.println(path);
         
-        ArrayList<Node> nodes = p.getNodes();
+        //get problem
+        Problem p = new ProblemFileReader().read_file(path);
+        //debuggerPrint(p);
+        
+        //initial set of nodes
         
          
         
         // imagino que algum lugar aqui le os arquivos
         Solution best = new Solution();
-        ILS ils = new ILS();
+        ILS ils = new ILS(p);
         //best = ils.iteratedSearch(nodes);      
     }
     
