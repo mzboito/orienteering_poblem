@@ -94,7 +94,7 @@ public class Problem {
     }
     
     public void setDistEuclSize(int size){
-        this.euclDist = new int[size+1][size+1];
+        this.euclDist = new int[size][size];
     }
     
     public void addEuclDist(int i, int j, double x1, double x2, double y1, double y2){
@@ -112,7 +112,8 @@ public class Problem {
         this.euclDist[i][j] = 0;
     }
     
-    public void printfEuclDist(){
+    public double getEuclDist(int i, int j){
+        return this.euclDist[i][j];
     }
         
 }

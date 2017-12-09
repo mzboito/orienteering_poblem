@@ -36,11 +36,17 @@ public class ILS {
             System.out.printf("%s     ", node.getLabel());
             System.out.printf("x: %.0f", node.getX());
             System.out.printf("  y: %.0f\n", node.getY());
+        }        
+         
+        System.out.printf("\nTamanho da matriz de distancias: %d", p.euclDist.length);
+        for(int i=0; i<=p.nodes.size(); i++){
+            System.out.println("\n");
+            //System.out.printf("%d: ", i);
+            for(int j=0; j<=p.nodes.size(); j++){
+                double dist = p.getEuclDist(i, j);
+                System.out.printf("%.0f  ", dist); 
+            }
         }
-        
-        //System.out.printf("oi %d\n", p.euclDist.length);
-        
-        System.out.printf("\nTamanho da matriz de distancias: %d\n", p.euclDist.length);
         
         // imagino que algum lugar aqui le os arquivos
         Solution best = new Solution();
