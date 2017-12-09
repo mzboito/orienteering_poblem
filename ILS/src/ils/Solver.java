@@ -58,21 +58,19 @@ public class Solver {
     public Solution localSearch(Solution bestLocal, int maxImprov){
     //adiciona n vezes, usa seed randomico pra adicionar nós, tenta maximizar o score e controlar o custo
         Random generator1 = new Random(seed);
-        int nodeNum1 = 0;
-        while(maxImprov > 0){
-            
-            boolean alreadyInserted = false;
-            int nodeToInsert = generator1.nextInt(p.nodes.size()) + 1;
-            //Node nodeToInsert = p.getNode(Integer.toString(randNum1));
-            
-            if(!(bestLocal.edgeAlreadyInserted(nodeToInsert))){ // não foi inserido ainda
-                while(!alreadyInserted){
-                    Random generator2 = new Random(seed); //onde vai ser inserido
-                    nodeNum1 = generator2.nextInt(p.nodes.size()) + 1;
-                    alreadyInserted = bestLocal.edgeAlreadyInserted(nodeToInsert);
-                }
+        int nodeNum1;
+        int size = bestLocal.getFreeNodesNumber();
+        boolean alreadyInserted;
+        while((maxImprov > 0)&&(size > 0)){
+            int nodeToInsert = generator1.nextInt(p.nodes.size()) + 1; //pega um num random
+            //testa se já não tá sendo usado
+            if(!(bestLocal.edgeAlreadyInserted(nodeToInsert))){ // senao
+                do{ //enquanto não achar
+                    nodeNum1 = generator1.nextInt(p.nodes.size()) + 1; //cata um node
+                    alreadyInserted = bestLocal.edgeAlreadyInserted(nodeToInsert); //esse node tem que estar sendo usado!
+                }while(!alreadyInserted);
                 
-                int nodeNum2 = s.verifyConectedNode(nodeNum1);
+                int nodeNum2 = bestLocal.verifyConectedNode(nodeNum1);
                 double euclDist = p.getEuclDist(nodeNum1, nodeNum2);
                 double newCost = bestLocal.getTotalCost() - euclDist; // tira o custo das arestas que não vão mais se conectar
                 
@@ -84,7 +82,9 @@ public class Solver {
                     bestLocal.updateScore(p.getScoreList());
                     bestLocal.updateCost(p.euclDist);
                 }
+                size = bestLocal.getFreeNodesNumber();
             }
+            
             maxImprov--;
         }
         return bestLocal;
