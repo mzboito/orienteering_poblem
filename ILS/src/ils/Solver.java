@@ -50,8 +50,12 @@ public class Solver {
     
     public Solution acceptSolution(Solution bestLocal, Solution newSol){
         
-        
-        
+        if(newSol.totalScore > bestLocal.totalScore){
+            Random generator = new Random(seed);
+            int chooseSol = generator.nextInt(100);
+            if(chooseSol < 90)
+                bestLocal = newSol;
+        }
         return bestLocal;
     }
     
