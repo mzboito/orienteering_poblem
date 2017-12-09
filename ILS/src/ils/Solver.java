@@ -104,7 +104,7 @@ public class Solver {
                     }while(!alreadyInserted);
                     
                     int nodeNum2 = bestLocal.verifyConectedNode(nodeNum1);
-                    System.out.printf("(%d,%d)\n", nodeNum1,nodeNum2);
+                    //System.out.printf("(%d,%d)\n", nodeNum1,nodeNum2);
                     double oldc = p.getEuclDist(nodeNum1, nodeNum2);
                     double newc = p.getEuclDist(nodeToInsert, nodeNum1) + p.getEuclDist(nodeToInsert, nodeNum2);
                     double newCost = bestLocal.getTotalCost() - oldc + newc; // tira o custo das arestas que não vão mais se conectar
@@ -129,13 +129,13 @@ public class Solver {
     public Solution perturbSolution(Solution bestLocal) { //remove uma quantidade N de nós da solução randomicamente e cola a solução
         
         //gerar o numero de coisas pra remover
-        int N = 20 * p.dimension / 100;
+        int N = 15 * p.dimension / 100;
         //System.out.printf("dimension %d e N %d\n", p.dimension, N);
         
         //pegar indices aleatorios
         Random generator = new Random(seed);
         int max = bestLocal.prob_dimension;
-        int min = 1;
+        int min = 0;
         int randomNum; 
         
         //N = 3;
@@ -146,7 +146,7 @@ public class Solver {
         //criar uma nova solucao removendo os indices aleatorios
         while(N > 0){
             randomNum = generator.nextInt((max - min) + 1) + min; //generates a number
-            //System.out.printf("Entering with rand num %d \n", randomNum);
+            System.out.printf("Entering with rand num %d \n", randomNum);
             if(randomNum != Integer.parseInt(p.starting_node)){
                 int edges[] = bestLocal.edges;
                 int a1 = -1;
