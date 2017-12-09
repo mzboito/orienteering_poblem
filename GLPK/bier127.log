@@ -1,0 +1,94 @@
+GLPSOL: GLPK LP/MIP Solver, v4.57
+Parameter(s) specified in the command line:
+ -m orientering_problem.mod -d data/bier127.dat -o solutions/bier127.sol
+Reading model section from orientering_problem.mod...
+38 lines were read
+Reading data section from data/bier127.dat...
+data/bier127.dat:261: warning: final NL missing before end of file
+261 lines were read
+Generating obj...
+Generating c1...
+Generating c2...
+Generating c3...
+Generating c4...
+Generating c5...
+Generating c6...
+Generating c7...
+Generating c8...
+Generating c9...
+Generating c10...
+Model has been successfully generated
+GLPK Integer Optimizer, v4.57
+16513 rows, 16383 columns, 143895 non-zeros
+16256 integer variables, all of which are binary
+Preprocessing...
+16259 rows, 16256 columns, 143390 non-zeros
+16130 integer variables, all of which are binary
+Scaling...
+ A: min|aij| =  1.000e+00  max|aij| =  1.944e+04  ratio =  1.944e+04
+GM: min|aij| =  2.972e-01  max|aij| =  3.364e+00  ratio =  1.132e+01
+EQ: min|aij| =  8.883e-02  max|aij| =  1.000e+00  ratio =  1.126e+01
+2N: min|aij| =  6.250e-02  max|aij| =  1.519e+00  ratio =  2.430e+01
+Constructing initial basis...
+Size of triangular part is 16257
+Solving LP relaxation...
+GLPK Simplex Optimizer, v4.57
+16259 rows, 16256 columns, 143390 non-zeros
+      0: obj =   5.500000000e+01 inf =   1.000e+00 (1)
+      1: obj =   5.500000000e+01 inf =   0.000e+00 (0)
+*   500: obj =   3.041408829e+03 inf =   1.475e-14 (168) 3
+*   622: obj =   3.105940231e+03 inf =   2.713e-14 (0) 1
+OPTIMAL LP SOLUTION FOUND
+Integer optimization begins...
++   622: mip =     not found yet <=              +inf        (1; 0)
++   655: mip =     not found yet <=   3.095000000e+03        (10; 0)
++   717: mip =     not found yet <=   3.095000000e+03        (18; 0)
++   798: mip =     not found yet <=   3.095000000e+03        (25; 0)
++   839: mip =     not found yet <=   3.095000000e+03        (32; 0)
++   908: mip =     not found yet <=   3.095000000e+03        (38; 0)
++  1058: mip =     not found yet <=   3.095000000e+03        (44; 0)
++  1219: mip =     not found yet <=   3.095000000e+03        (50; 0)
++  1399: mip =     not found yet <=   3.095000000e+03        (61; 0)
++  1617: mip =     not found yet <=   3.095000000e+03        (74; 0)
++  1785: mip =     not found yet <=   3.094000000e+03        (79; 1)
++  1835: mip =     not found yet <=   3.094000000e+03        (84; 1)
+Time used: 60.1 secs.  Memory used: 44.9 Mb.
++  1906: mip =     not found yet <=   3.094000000e+03        (88; 1)
++  2039: mip =     not found yet <=   3.094000000e+03        (93; 1)
++  2171: mip =     not found yet <=   3.094000000e+03        (100; 1)
++  2282: mip =     not found yet <=   3.094000000e+03        (108; 1)
++  2683: mip =     not found yet <=   3.094000000e+03        (123; 1)
++  2900: mip =     not found yet <=   3.094000000e+03        (134; 2)
++  3009: mip =     not found yet <=   3.094000000e+03        (142; 2)
++  3099: mip =     not found yet <=   3.094000000e+03        (150; 2)
++  3182: mip =     not found yet <=   3.094000000e+03        (160; 2)
++  3246: mip =     not found yet <=   3.094000000e+03        (171; 2)
++  3367: mip =     not found yet <=   3.094000000e+03        (183; 2)
+Time used: 120.4 secs.  Memory used: 45.6 Mb.
++  3523: mip =     not found yet <=   3.088000000e+03        (190; 3)
++  3642: mip =     not found yet <=   3.088000000e+03        (199; 3)
++  3722: mip =     not found yet <=   3.088000000e+03        (208; 4)
++  3944: mip =     not found yet <=   3.088000000e+03        (217; 4)
++  4247: mip =     not found yet <=   3.088000000e+03        (230; 4)
++  4435: mip =     not found yet <=   3.088000000e+03        (247; 4)
++  4639: mip =     not found yet <=   3.088000000e+03        (265; 4)
++  5162: mip =     not found yet <=   3.088000000e+03        (285; 4)
++  5412: mip =     not found yet <=   3.086000000e+03        (298; 5)
++  5496: mip =     not found yet <=   3.085000000e+03        (307; 6)
++  5624: mip =     not found yet <=   3.085000000e+03        (313; 6)
++  5724: mip =     not found yet <=   3.085000000e+03        (321; 6)
+Time used: 180.9 secs.  Memory used: 46.5 Mb.
++  5840: mip =     not found yet <=   3.085000000e+03        (329; 6)
++  5997: mip =     not found yet <=   3.085000000e+03        (338; 6)
++  6127: mip =     not found yet <=   3.085000000e+03        (347; 7)
++  6242: mip =     not found yet <=   3.085000000e+03        (354; 7)
++  6348: mip =     not found yet <=   3.084000000e+03        (359; 8)
++  6378: mip =     not found yet <=   3.084000000e+03        (366; 8)
++  6399: mip =     not found yet <=   3.084000000e+03        (373; 8)
++  6479: mip =     not found yet <=   3.084000000e+03        (380; 8)
++  6573: mip =     not found yet <=   3.084000000e+03        (386; 8)
++  6682: mip =     not found yet <=   3.084000000e+03        (390; 8)
++  6727: mip =     not found yet <=   3.079000000e+03        (395; 9)
+Time used: 241.6 secs.  Memory used: 47.0 Mb.
++  6796: mip =     not found yet <=   3.079000000e+03        (401; 9)
++  6897: mip =     not found yet <=   3.079000000e+03        (408; 9)
