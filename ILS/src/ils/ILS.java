@@ -19,9 +19,6 @@ public class ILS {
     /**
      * @param args the command line arguments
      */
-    ArrayList<Node> usedNodes = new ArrayList();
-    ArrayList<Node> auxNodes = new ArrayList();
-    Problem p;
     
     public void debuggerPrint(Problem p){
         /* Imprimir o que foi lido no arquivo referente ao node que é o que eu preciso */
@@ -50,63 +47,18 @@ public class ILS {
         //get from user path and seed 
         String path = args[0];
         int seed = Integer.parseInt(args[1]);
+        String output = args[2];
+        int maxSteps = Integer.parseInt(args[2]);
         //System.out.println(path);
         
         //get problem
         Problem p = new ProblemFileReader().read_file(path);
         //debuggerPrint(p);
-        
-        //initial set of nodes
-        
-         
-        
-        // imagino que algum lugar aqui le os arquivos
-        Solution best = new Solution();
-        ILS ils = new ILS(p);
-        //best = ils.iteratedSearch(nodes);      
-    }
-    
-    // busca local iterada
-    public Solution iteratedSearch(ArrayList<Node> nodes)
-    {
-        int maxIt = 100;
-        int maxImprov = 50;
-        
-        auxNodes.add(nodes.get(0));
-        
 
-        Solution bestSolution = new Solution();
-        Solution auxSolution = new Solution();
+        Solver ils = new Solver(p, seed, maxSteps);
+        ils.exec();
+        ils.writeSolution(output);
         
-        bestSolution.nodeList.add(nodes.get(0));
-        
-        while(maxIt > 0){
-            
-            //local search
-            // perturbation
-            // accept
-            
-            maxIt--;
-        }
-        
-        return bestSolution;
     }
     
-    /* Tipo um hill clibing */
-    public Solution localSearch(Solution bestLocal, ArrayList<Node> nodes, int maxImprov)
-    {
-        return bestLocal;
-    }
-    
-    // Perturba a bestSolution encontrada removendo n nodos da solução
-    public Solution perturbSolution(Solution bestLocal)
-    {
-        return bestLocal;
-    }
-
-    // Perturba a bestSolution trocando 2 nodos de lugar (talvez mudar pra k-opt)
-    public Solution twoOpt(Solution bestLocal)
-    {
-        return bestLocal;
-    }
 }
