@@ -21,16 +21,11 @@ public class ILS {
      */
     ArrayList<Node> usedNodes = new ArrayList();
     ArrayList<Node> auxNodes = new ArrayList();
+    Problem p;
+    int seed;
     
-    public static void main(String[] args) throws IOException {
-        // TODO code application logic here
-        
-        //Problem p = new ProblemFileReader().read_file("/home/mzboito/Downloads/instances/a8.oplib");
-        Problem p = new ProblemFileReader().read_file("C:/Ble/instances/a8.oplib");
-        
-        ArrayList<Node> nodes = p.getNodes();
-        
-         /* Imprimir o que foi lido no arquivo referente ao node que é o que eu preciso */
+    public void debuggerPrint(ArrayList<Node> nodes){
+        /* Imprimir o que foi lido no arquivo referente ao node que é o que eu preciso */
         for(Node node : nodes)
         {
             System.out.printf("%s     ", node.getLabel());
@@ -47,6 +42,17 @@ public class ILS {
                 System.out.printf("%.0f  ", dist); 
             }
         }
+    }
+    
+    public static void main(String[] args) throws IOException {
+
+        //get problem
+        Problem p = new ProblemFileReader().read_file("/home/mzboito/Documents/orienteering_poblem/instances/a8.oplib");
+        // Problem p = new ProblemFileReader().read_file("C:/Ble/instances/a8.oplib");
+        
+        ArrayList<Node> nodes = p.getNodes();
+        
+         
         
         // imagino que algum lugar aqui le os arquivos
         Solution best = new Solution();
@@ -65,7 +71,7 @@ public class ILS {
         // bestSolution inicial deve ser vazia para ser atualizada
            
         //seta como melhor solução o primeiro nodo da auxSolution
-        bestSolution.nodeList.add(auxSolution.nodeList.get(0));
+        //bestSolution.nodeList.add(auxSolution.nodeList.get(0));
         
         while(maxIt > 0){
             

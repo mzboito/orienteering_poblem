@@ -108,7 +108,7 @@ public class ProblemFileReader {
             }
         }
         
-        System.out.println("\n");
+        //System.out.println("\n");
         
         return p;
     }

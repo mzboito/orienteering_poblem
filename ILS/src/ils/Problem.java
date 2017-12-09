@@ -104,11 +104,10 @@ public class Problem {
         
         this.euclDist[i][j] = distance;
         
-        System.out.printf("%d   ", this.euclDist[i][j]);
+        //System.out.printf("%d   ", this.euclDist[i][j]);
     }
     
     public void setEuclDistZero(int i, int j){
-           
         this.euclDist[i][j] = 0;
     }
     
