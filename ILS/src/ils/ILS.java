@@ -50,7 +50,7 @@ public class ILS {
         }*/
         
         String path = args[0];
-        path = "C:/Ble/UFRGS/CIC/5SEMESTRE/Otimização/instances/a8.oplib";
+        //path = "C:/Ble/UFRGS/CIC/5SEMESTRE/Otimização/instances/a8.oplib";
         int seed = Integer.parseInt(args[1]);
         String output = args[2];
         System.out.print(output);
@@ -58,7 +58,7 @@ public class ILS {
         System.out.println(maxSteps);
         //System.out.println(path);
         
-        //path = "/home/mzboito/Documents/orienteering_poblem/ILS/dist/ILS.jar";
+        path = "/home/mzboito/Documents/orienteering_poblem/instances/a8.oplib";
         
         //get problem
         Problem p = new ProblemFileReader().read_file(path);
