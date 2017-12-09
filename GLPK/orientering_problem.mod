@@ -20,7 +20,11 @@ maximize obj: sum{i in NODES} score[i]*v[i];
 #s.t. c2{i in NODES}:
 #	sum{j in NODES} v[i]*a[i,j] <= 1; #(chega no max uma aresta para Vj E à solução)
 
-s.t. c1: v[v0] = 1 ;
+###################################### AQUI
+s.t. c1{i in NODES}:
+	sum{j in NODES} x[i,j] >= v[i];
+
+s.t. c2: v[v0] = 1;
 
 #restrição 2: começa e terminada em v0
 s.t. c3:
