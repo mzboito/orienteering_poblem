@@ -75,10 +75,13 @@ public class Solver {
             System.out.println("Random number: " + nodeToInsert);
             //testa se já não tá sendo usado
             if(bestLocal.startingSolution()){ //só tem um nodo
+                //System.out.println("SOLUTION SIZE 1");
                 int starting_node = Integer.parseInt(p.starting_node);
                 if(nodeToInsert != starting_node){ //se o random não é o inicial
+                    //System.out.println("IS NOT V0");
                     double newc = p.getEuclDist(nodeToInsert, starting_node);
-                    if(newc < bestLocal.totalCost){ //se a edge não é maior que o custo
+                    //System.out.println(bestLocal.totalCost);
+                    if(newc < p.cost_limit){ //se a edge não é maior que o custo
                         bestLocal.addEdge(starting_node, nodeToInsert);
                         bestLocal.addEdge(nodeToInsert, starting_node);
                         bestLocal.updateScore(p.getScoreList());
@@ -94,13 +97,14 @@ public class Solver {
                         alreadyInserted = bestLocal.edgeAlreadyInserted(nodeToInsert); //esse node tem que estar sendo usado!
                         System.out.println(alreadyInserted);
                     }while(!alreadyInserted);
-
+                    
                     int nodeNum2 = bestLocal.verifyConectedNode(nodeNum1);
+                    System.out.printf("(%d,%d)\n", nodeNum1,nodeNum2);
                     double oldc = p.getEuclDist(nodeNum1, nodeNum2);
                     double newc = p.getEuclDist(nodeToInsert, nodeNum1) + p.getEuclDist(nodeToInsert, nodeNum2);
                     double newCost = bestLocal.getTotalCost() - oldc + newc; // tira o custo das arestas que não vão mais se conectar
-
-                    if(newCost <= bestLocal.totalCost){ //(node1, node2)
+                    
+                    if(newCost <= p.cost_limit){ //(node1, node2)
                         bestLocal.removeEdge(nodeNum1); //remove edge[node1] = node2
                         //bestLocal.removeEdge(nodeNum2);
                         bestLocal.addEdge(nodeNum1, nodeToInsert); //create edge[node1] = nodeToInsert
@@ -111,8 +115,6 @@ public class Solver {
                     }
                 }
             }
-           
-            
             maxImprov--;
         }
         return bestLocal;
