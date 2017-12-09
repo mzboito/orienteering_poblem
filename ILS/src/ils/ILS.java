@@ -7,6 +7,8 @@ package ils;
 
 import static java.lang.Math.sqrt;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -17,37 +19,127 @@ public class ILS {
     /**
      * @param args the command line arguments
      */
+    ArrayList<Node> usedNodes = new ArrayList();
+    ArrayList<Node> auxNodes = new ArrayList();
+    
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
         
-        Problem p = new ProblemFileReader().read_file("/home/mzboito/Downloads/instances/a8.oplib");
+        //Problem p = new ProblemFileReader().read_file("/home/mzboito/Downloads/instances/a8.oplib");
+        Problem p = new ProblemFileReader().read_file("C:/Ble/instances/a8.oplib");
+        
+        ArrayList<Node> nodes = p.getNodes();
+        
+         /* Imprimir o que foi lido no arquivo referente ao node que é o que eu preciso */
+        for(Node node : nodes)
+        {
+            System.out.printf("%s     ", node.getLabel());
+            System.out.printf("x: %.0f", node.getX());
+            System.out.printf("  y: %.0f\n", node.getY());
+        }
+        
+        //System.out.printf("oi %d\n", p.euclDist.length);
+        
+        System.out.printf("\nTamanho da matriz de distancias: %d\n", p.euclDist.length);
         
         // imagino que algum lugar aqui le os arquivos
-        String str = new String();
-        Node node = new Node(str, 5.9, 5.6, 7.8);
-        
+        Solution best = new Solution();
+        ILS ils = new ILS();
+        //best = ils.iteratedSearch(nodes);      
     }
     
-    public Solution initSearch(Node node)
+    // busca local iterada
+    public Solution iteratedSearch(ArrayList<Node> nodes)
     {
-        String emptyStr = "";
-        Node initNode = new Node(emptyStr, 0, 0, 0);
+        int maxIt = 100;
+        int maxImprov = 50;
+        
+        auxNodes.add(nodes.get(0));
+        
         // bestSolution inicial deve ser vazia para ser atualizada
-        Solution bestSolution = new Solution(node, 0, 0);
+        Solution bestSolution = new Solution();
+        Solution auxSolution = new Solution();
+        
+        /* LEMBRAR: O CUSTO É A DISTANCIA ENTRE AS ARESTAS, NÃO O SCORE */
+        //auxSolution.nodeList = randomInitialSol(nodes);
+        System.out.println("\n\n");
+        for(Node node : bestSolution.getNodeList()){
+            System.out.printf("%s     ", node.getLabel());
+            System.out.printf("x: %.0f", node.getX());
+            System.out.printf("  y: %.0f\n", node.getY());
+        }
+        
+        
+        //seta como melhor solução o primeiro nodo da auxSolution
+        // não vai ser o primeiro nodo de entrada porque a auxSolution foi embaralhada
+        bestSolution.nodeList.add(auxSolution.nodeList.get(0));
+        
+        while(maxIt > 0){
+            
+            //local search
+            // perturbation
+            // accept
+            
+            maxIt--;
+        }
         
         return bestSolution;
     }
     
-    /* Coloquei como ta no read me, mas vou fazer testes e ver se é isso mesmo */
-    public double euclideanDistance(double x1, double x2, double y1, double y2)
+    /* Tipo um hill clibing */
+    public Solution localSearch(Solution bestLocal, ArrayList<Node> nodes, int maxImprov)
     {
-        double distance = 0.0;
-        
-        double xd = x1 - x2;
-        double yd = y1 - y2;
-        double dab = (int)(sqrt((xd*xd) + (yd*yd)) + 0.5);
-        
-        return distance;
+        return bestLocal;
     }
     
+    // Perturba a bestSolution encontrada removendo n nodos da solução
+    public Solution perturbSolution(Solution bestLocal)
+    {
+        return bestLocal;
+    }
+    
+    // Pega um solução inicial aleatoria
+    public Solution randomInitialSol(Solution sol, ArrayList<Node> nodes)
+    {
+        Random gerador = new Random();
+        int random;
+        Boolean repeat = false;
+        ArrayList<Node> usedNodes = new ArrayList();
+        ArrayList<Node> shuffledNodes = new ArrayList();
+        
+        /*
+        // array auxiliar pra trocar
+        for(int i=0; i<nodes.size(); i++){
+            auxArray.add(i, nodes.get(i));
+            shuffledNodes.add(i, nodes.get(i));
+        }
+        
+        // cria lista aleatória
+        for(int i=0; i<nodes.size(); i++){
+            random = gerador.nextInt(nodes.size());
+            auxArray.set(i, shuffledNodes.get(i));
+            shuffledNodes.set(i, shuffledNodes.get(random));
+            shuffledNodes.set(random, auxArray.get(i));
+        }
+        */
+        
+        usedNodes.add(0, nodes.get(0));
+        
+        for(int i=1; i<nodes.size(); i++){
+            
+        }
+        
+        
+        
+        
+        
+        
+        return sol;
+    }
+    
+    // Perturba a bestSolution trocando 2 nodos de lugar (talvez mudar pra k-opt)
+    public Solution twoOpt(Solution bestLocal)
+    {
+        return bestLocal;
+    }
 }

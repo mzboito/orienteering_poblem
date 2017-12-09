@@ -95,6 +95,28 @@ public class ProblemFileReader {
                 break;
             }}}}}}}}}}}
         }
+        
+        p.setDistEuclSize(p.nodes.size());
+        // zera a linha [0] e a coluna [0] da matriz
+        //for(int l=0; l<=p.nodes.size(); l++)
+        //    p.setEuclDistZero(l, 0);
+        
+        //for(int c=0; c<=p.nodes.size(); c++)
+        //    p.setEuclDistZero(0, c);
+        
+        // cria a matriz de distancia euclidiana aqui
+        //System.out.printf("%d:  ", p.nodes.size()+1);
+        for(int i=0; i<p.nodes.size(); i++){
+            System.out.println("\n");
+            //System.out.printf("%d: ", i);
+            for(int j=0; j<p.nodes.size(); j++){
+                p.addEuclDist(i, j, p.nodes.get(i).x, p.nodes.get(j).x, p.nodes.get(i).y, p.nodes.get(j).y);
+            }
+        }
+        
+        System.out.println("\n");
+        
+        
         return p;
     }
     

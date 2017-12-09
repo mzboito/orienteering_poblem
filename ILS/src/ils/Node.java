@@ -5,6 +5,9 @@
  */
 package ils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author mzboito
@@ -14,12 +17,14 @@ public class Node {
     double x;
     double y;
     double score;
+    ArrayList<Double> euclDist;
 
     public Node(String label, double x, double y, double score) {
         this.label = label;
         this.x = x;
         this.y = y;
         this.score = score;
+        this.euclDist = new ArrayList();
     }
 
     public Node(String label, double x, double y) {
@@ -49,6 +54,7 @@ public class Node {
         this.score = score;
     }
     
-    
-
+    public void addEuclDist(double distance, int node){
+        this.euclDist.add(node, distance);
+    }
 }

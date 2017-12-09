@@ -5,6 +5,7 @@
  */
 package ils;
 
+import static java.lang.Math.sqrt;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -19,6 +20,7 @@ public class Problem {
     double cost_limit;
     ArrayList<Node> nodes;
     String starting_node;
+    int euclDist[][];
 
     public Problem(String name, String comment, int dimension, double cost_limit, ArrayList<Node> nodes, String starting_node) {
         this.name = name;
@@ -27,10 +29,11 @@ public class Problem {
         this.cost_limit = cost_limit;
         this.nodes = nodes;
         this.starting_node = starting_node;
+        //this.euclDist = new double[nodes.size()][nodes.size()];
     }
 
     public Problem() {
-        this.nodes = new ArrayList();
+        this.nodes = new ArrayList();         
     }
 
     public String getComment() {
@@ -88,6 +91,28 @@ public class Problem {
             }
         } 
         return null;
+    }
+    
+    public void setDistEuclSize(int size){
+        this.euclDist = new int[size+1][size+1];
+    }
+    
+    public void addEuclDist(int i, int j, double x1, double x2, double y1, double y2){
+        double xd = x1 - x2;
+        double yd = y1 - y2;
+        int distance = (int)(sqrt((xd*xd) + (yd*yd)) + 0.5);
+        
+        this.euclDist[i][j] = distance;
+        
+        System.out.printf("%d   ", this.euclDist[i][j]);
+    }
+    
+    public void setEuclDistZero(int i, int j){
+           
+        this.euclDist[i][j] = 0;
+    }
+    
+    public void printfEuclDist(){
     }
         
 }
