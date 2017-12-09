@@ -25,10 +25,11 @@ public class Solver {
         this.maxSteps = maxSteps;
         this.usedNodes = usedNodes = new ArrayList();
         this.auxNodes = new ArrayList();
-        if(p.getStarting_node() != null){
-            s.setTrivialSolution(p.getStarting_node());
+        this.s = new Solution();
+        Node n = p.getStarting_node();
+        if(n != null){
+            s.setTrivialSolution(n);
         }
-        System.out.println("sai");
     }
     
     public void exec(){

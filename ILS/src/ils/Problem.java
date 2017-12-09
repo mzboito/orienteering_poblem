@@ -58,12 +58,10 @@ public class Problem {
 
     public Node getStarting_node() {
         for(Node n : this.nodes){
-            System.out.println(n.getLabel());
-            if(this.starting_node.equals(n.getLabel())){
+            if(starting_node.equals(n.getLabel())){
                 return n;
             }
         }
-        System.out.println("problema");
         return null;
     }
     
