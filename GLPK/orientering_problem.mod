@@ -5,7 +5,7 @@ param v0; #nodo inicial
 param COST_LIMIT; #custo máximo
 param score{i in NODES}; #score do nodo i
 param d{i in NODES, j in NODES}; #custo da aresta que liga i e j
-#param a{i in NODES, j in 	NODES}; #Aij, número de arestas que ligam o vértice i ao vértice j
+
 
 var v{i in NODES}, binary; #Vn, conjunto de vértices que pertencem à rota da solução, binária
 var x{i in NODES, j in NODES}, binary; #variavel binaria de presença no conjunto solução
@@ -13,6 +13,7 @@ var u{i in NODES}; #Ui ordem do nodo i na rota
 
 maximize obj: sum{i in NODES} score[i]*v[i];
 
+######################## RESTRIÇÕES ANTIGAS
 #restrição 1: cada vn aparece só uma vez
 #s.t. c1{j in NODES}:
 #	sum{i in NODES} v[i]*a[i,j] <= 1; #(sai no max uma aresta de Vi E à solução)
@@ -20,11 +21,15 @@ maximize obj: sum{i in NODES} score[i]*v[i];
 #s.t. c2{i in NODES}:
 #	sum{j in NODES} v[i]*a[i,j] <= 1; #(chega no max uma aresta para Vj E à solução)
 
-###################################### AQUI
+###################################### O QUE NÓS TENTAMOS
 s.t. c1{i in NODES}:
-	sum{j in NODES} x[i,j] >= v[i];
+	v[i] <= sum{j in NODES} x[i,j];
 
 s.t. c2: v[v0] = 1;
+
+
+
+#################### DAQUI EM DIANTE ESTÁ OK
 
 #restrição 2: começa e terminada em v0
 s.t. c3:
