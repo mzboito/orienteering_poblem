@@ -103,8 +103,7 @@ public class Problem {
         int distance = (int)(sqrt((xd*xd) + (yd*yd)) + 0.5);
         
         this.euclDist[i][j] = distance;
-        
-        //System.out.printf("%d   ", this.euclDist[i][j]);
+
     }
     
     public void setEuclDistZero(int i, int j){

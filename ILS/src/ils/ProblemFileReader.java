@@ -8,9 +8,7 @@ package ils;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  *
@@ -97,7 +95,7 @@ public class ProblemFileReader {
         }
         
         p.setDistEuclSize(p.nodes.size()+1);
-        
+             
         
         
         for(int i=1; i<=p.nodes.size(); i++){
@@ -110,7 +108,7 @@ public class ProblemFileReader {
         
         //System.out.println("\n");
         
-        return p;
+           return p;
     }
     
     /* FILE EXAMPLE
