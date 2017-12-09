@@ -93,7 +93,7 @@ public class Solver {
     public Solution perturbSolution(Solution bestLocal) { //remove uma quantidade N de nós da solução randomicamente e cola a solução
         
         //gerar o numero de coisas pra remover
-        int N = 15 * p.dimension / 100;
+        int N = 20 * p.dimension / 100;
         System.out.printf("dimension %d e N %d\n", p.dimension, N);
         
         //pegar indices aleatorios
@@ -102,15 +102,15 @@ public class Solver {
         int min = 0;
         int randomNum; 
         
-        N = 3;
-        bestLocal.addEdge(1, 3);
-        bestLocal.addEdge(3, 7);
-        bestLocal.addEdge(7, 5);
-        bestLocal.addEdge(5, 1);
+        //N = 3;
+        //bestLocal.addEdge(1, 3);
+        //bestLocal.addEdge(3, 7);
+        //bestLocal.addEdge(7, 5);
+        //bestLocal.addEdge(5, 1);
         //criar uma nova solucao removendo os indices aleatorios
         while(N > 0){
             randomNum = generator.nextInt((max - min) + 1) + min; //generates a number
-            System.out.printf("Entering with rand num %d \n", randomNum);
+            //System.out.printf("Entering with rand num %d \n", randomNum);
             int edges[] = bestLocal.edges;
             int a1 = -1;
             int a2 = edges[randomNum];
@@ -124,12 +124,12 @@ public class Solver {
                }
             }
             if((a2 != -1)&&(a1 != -1)){
-                System.out.printf("(%d,%d)\n", a1,a2);
-                System.out.println("old edge");
+                //System.out.printf("(%d,%d)\n", a1,a2);
+                //System.out.println("old edge");
                 bestLocal.print_edges();
                 bestLocal.removeEdge(randomNum);
                 bestLocal.addEdge(a1, a2); //fix the route
-                System.out.println("new edge");
+                //System.out.println("new edge");
                 bestLocal.print_edges();
             }
             N--;

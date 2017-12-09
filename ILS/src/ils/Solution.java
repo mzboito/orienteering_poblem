@@ -70,7 +70,7 @@ public class Solution {
     
     public void updateScore(double s[]){
         Double newScore = 0.0;
-        for(int i = 1; i <= prob_dimension; i++){
+        for(int i = 1; i < prob_dimension; i++){
             if(edges[i] != -1){
                 newScore += s[i]; 
             }
@@ -80,8 +80,8 @@ public class Solution {
     
     public void updateCost(int d[][]){
         Double newCost = 0.0;
-        for(int i = 1; i <= prob_dimension; i++){
-            for(int j = 1; i <= prob_dimension; i++){
+        for(int i = 1; i < prob_dimension; i++){
+            for(int j = 1; i < prob_dimension; i++){
                 if(edges[i] != -1){
                     if(edges[i] == j){ //it has a connection
                         newCost += d[i][j];
