@@ -30,7 +30,6 @@ public class ILS {
         
         ArrayList<Node> nodes = p.getNodes();
         
-         /* Imprimir o que foi lido no arquivo referente ao node que é o que eu preciso */
         for(Node node : nodes)
         {
             System.out.printf("%s     ", node.getLabel());
@@ -50,22 +49,22 @@ public class ILS {
         
         // imagino que algum lugar aqui le os arquivos
         Solution best = new Solution();
-        ILS ils = new ILS();     
+        ILS ils = new ILS();
+        //best = ils.iteratedSearch(nodes);      
     }
     
     // busca local iterada
     public Solution iteratedSearch(ArrayList<Node> nodes)
     {
-        Solution bestSolution = new Solution();
         int maxIt = 100;
         int maxImprov = 50;
         
         auxNodes.add(nodes.get(0));
         
-        // bestSolution inicial deve ser vazia para ser atualizada
-           
-        //seta como melhor solução o primeiro nodo da auxSolution
-        bestSolution.nodeList.add(auxSolution.nodeList.get(0));
+        Solution bestSolution = new Solution();
+        Solution auxSolution = new Solution();
+        
+        bestSolution.nodeList.add(nodes.get(0));
         
         while(maxIt > 0){
             
@@ -90,7 +89,7 @@ public class ILS {
     {
         return bestLocal;
     }
-    
+
     // Perturba a bestSolution trocando 2 nodos de lugar (talvez mudar pra k-opt)
     public Solution twoOpt(Solution bestLocal)
     {

@@ -97,18 +97,12 @@ public class ProblemFileReader {
         }
         
         p.setDistEuclSize(p.nodes.size()+1);
-        
-        
-        
+             
         for(int i=1; i<=p.nodes.size(); i++){
-            System.out.println("\n");
-            //System.out.printf("%d: ", i);
             for(int j=1; j<=p.nodes.size(); j++){
                 p.addEuclDist(i, j, p.nodes.get(i-1).x, p.nodes.get(j-1).x, p.nodes.get(i-1).y, p.nodes.get(j-1).y);
             }
         }
-        
-        System.out.println("\n");
         
         return p;
     }
