@@ -52,15 +52,15 @@ public class Solution {
         this.totalScore = n.getScore();
     }
     
-    public int addEdge(int n1, int n2){
-        if(this.edges[n1] != -1){ //if it is not free
+    public void addEdge(int n1, int n2){
+        /*if(this.edges[n1] != -1){ //if it is not free
             return -1;
-        }
+        }*/
         this.edges[n1] = n2;
-        return 0;
+        //return 0;
     }
     
-    public int remodeEdge(int n1){
+    public int removeEdge(int n1){
         if(this.edges[n1] == -1){ //if it is not free
             return -1;
         }
@@ -68,7 +68,7 @@ public class Solution {
         return 0;
     }
     
-    public void updateScore(int s[]){
+    public void updateScore(double s[]){
         Double newScore = 0.0;
         for(int i = 1; i <= prob_dimension; i++){
             if(edges[i] != -1){
@@ -91,5 +91,26 @@ public class Solution {
         }
     }
 
+    boolean startingSolution() {
+        int count = 0;
+        for(int i = 1; i < prob_dimension; i++){
+            if(edges[i] != -1){
+                count++;
+            }
+        }
+        if(count == 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    void print_edges(){
+        for(int i = 1; i < prob_dimension; i++){
+            System.out.printf("%d", edges[i]);
+            System.out.printf(" ");
+        }
+        System.out.println();
+    }
     
 }

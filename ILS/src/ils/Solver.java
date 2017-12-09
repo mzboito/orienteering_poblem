@@ -102,21 +102,40 @@ public class Solver {
         int min = 0;
         int randomNum; 
         
-        N = 10;
+        N = 3;
+        bestLocal.addEdge(1, 3);
+        bestLocal.addEdge(3, 7);
+        bestLocal.addEdge(7, 5);
+        bestLocal.addEdge(5, 1);
+        //criar uma nova solucao removendo os indices aleatorios
         while(N > 0){
             randomNum = generator.nextInt((max - min) + 1) + min; //generates a number
-            //System.out.printf("dimension %d e N %d rand num %d \n", p.dimension, N, randomNum);
-            //int link = bestLocal.getEdge(randomNum); // (randomNum, link) são uma edge, se tirar randomNum tem que achar oq aponta pra ele pra ligar com link
+            System.out.printf("Entering with rand num %d \n", randomNum);
+            int edges[] = bestLocal.edges;
+            int a1 = -1;
+            int a2 = edges[randomNum];
+            if(bestLocal.startingSolution()){
+                a1 = Integer.parseInt(p.starting_node);
+            }else{
+                for(int i=1; i < bestLocal.prob_dimension; i++){
+                if(edges[i] == randomNum){
+                    a1 = i;
+                }
+               }
+            }
+            if((a2 != -1)&&(a1 != -1)){
+                System.out.printf("(%d,%d)\n", a1,a2);
+                System.out.println("old edge");
+                bestLocal.print_edges();
+                bestLocal.removeEdge(randomNum);
+                bestLocal.addEdge(a1, a2); //fix the route
+                System.out.println("new edge");
+                bestLocal.print_edges();
+            }
             N--;
         }
-        //criar uma nova solucao removendo os indices aleatorios
-        
-        
-        // nextInt is normally exclusive of the top value,
-        // so add 1 to make it inclusive
-        
-        
-        
+        bestLocal.updateCost(p.euclDist);
+        bestLocal.updateScore(p.getScoreList());
         return bestLocal;
     }
 
