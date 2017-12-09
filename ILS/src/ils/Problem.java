@@ -103,10 +103,10 @@ public class Problem {
         int distance = (int)(sqrt((xd*xd) + (yd*yd)) + 0.5);
         
         this.euclDist[i][j] = distance;
+
     }
     
     public void setEuclDistZero(int i, int j){
-           
         this.euclDist[i][j] = 0;
     }
     

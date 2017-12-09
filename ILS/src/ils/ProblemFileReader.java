@@ -8,9 +8,7 @@ package ils;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  *
@@ -51,7 +49,6 @@ public class ProblemFileReader {
                 p.setComment(comment);
             }else{
             if(lines.get(i).startsWith("DIMENSION")){
-                //System.out.println("entrei");
                 int dimension = Integer.parseInt(lines.get(i).split(": ")[1]);
                 p.setDimension(dimension);
             }else{
@@ -63,10 +60,8 @@ public class ProblemFileReader {
                 coord_flag = true;
             }else{
              if(lines.get(i).startsWith("NODE_SCORE_SECTION")){
-                System.out.println("entrei");
                 coord_flag = false;
                 score_flag = true;
-                System.out.println("entrei");
             }else{  
             if(coord_flag){ //1 140 145
                 String name = lines.get(i).split(" ")[0];
@@ -81,7 +76,6 @@ public class ProblemFileReader {
                 depot_flag = true;  
             }else{    
             if(score_flag){ //2 36
-                System.out.println("entrei");
                 String label = lines.get(i).split(" ")[0];
                 double score = Double.parseDouble(lines.get(i).split(" ")[1]);
                 Node n = p.getNode(label);
@@ -97,14 +91,15 @@ public class ProblemFileReader {
         }
         
         p.setDistEuclSize(p.nodes.size()+1);
-             
+                  
         for(int i=1; i<=p.nodes.size(); i++){
+            //System.out.printf("%d: ", i);
             for(int j=1; j<=p.nodes.size(); j++){
                 p.addEuclDist(i, j, p.nodes.get(i-1).x, p.nodes.get(j-1).x, p.nodes.get(i-1).y, p.nodes.get(j-1).y);
             }
         }
-        
-        return p;
+
+           return p;
     }
     
     /* FILE EXAMPLE

@@ -19,15 +19,9 @@ public class ILS {
     /**
      * @param args the command line arguments
      */
-    ArrayList<Node> usedNodes = new ArrayList();
-    ArrayList<Node> auxNodes = new ArrayList();
     
-    public static void main(String[] args) throws IOException {
-        // TODO code application logic here
-        
-        //Problem p = new ProblemFileReader().read_file("/home/mzboito/Downloads/instances/a8.oplib");
-        Problem p = new ProblemFileReader().read_file("C:/Ble/instances/a8.oplib");
-        
+    public void debuggerPrint(Problem p){
+        /* Imprimir o que foi lido no arquivo referente ao node que é o que eu preciso */
         ArrayList<Node> nodes = p.getNodes();
         
         for(Node node : nodes)
@@ -46,53 +40,27 @@ public class ILS {
                 System.out.printf("%.0f  ", dist); 
             }
         }
-        
-        // imagino que algum lugar aqui le os arquivos
-        Solution best = new Solution();
-        ILS ils = new ILS();
-        //best = ils.iteratedSearch(nodes);      
     }
     
-    // busca local iterada
-    public Solution iteratedSearch(ArrayList<Node> nodes)
-    {
-        int maxIt = 100;
-        int maxImprov = 50;
-        
-        auxNodes.add(nodes.get(0));
-        
-        Solution bestSolution = new Solution();
-        Solution auxSolution = new Solution();
-        
-        bestSolution.nodeList.add(nodes.get(0));
-        
-        while(maxIt > 0){
-            
-            //local search
-            // perturbation
-            // accept
-            
-            maxIt--;
-        }
-        
-        return bestSolution;
-    }
-    
-    /* Tipo um hill clibing */
-    public Solution localSearch(Solution bestLocal, ArrayList<Node> nodes, int maxImprov)
-    {
-        return bestLocal;
-    }
-    
-    // Perturba a bestSolution encontrada removendo n nodos da solução
-    public Solution perturbSolution(Solution bestLocal)
-    {
-        return bestLocal;
-    }
+    public static void main(String[] args) throws IOException {
 
-    // Perturba a bestSolution trocando 2 nodos de lugar (talvez mudar pra k-opt)
-    public Solution twoOpt(Solution bestLocal)
-    {
-        return bestLocal;
-    }
+        //get from user path and seed 
+        String path = args[0];
+        path = "C:/Ble/UFRGS/CIC/5SEMESTRE/Otimização/instances/a8.oplib";
+        int seed = Integer.parseInt(args[1]);
+        String output = args[2];
+        System.out.print(output);
+        int maxSteps = Integer.parseInt(args[3]);
+        System.out.println(maxSteps);
+        
+        //get problem
+        Problem p = new ProblemFileReader().read_file(path);
+        //debuggerPrint(p);
+        System.out.println("\nta tudo ok aqui\n");
+
+        Solver ils = new Solver(p, seed, maxSteps);
+        System.out.println("\ndepois do solver ils, ta tudo ok aqui\n");
+        //ils.exec();
+        //ils.writeSolution(output);   
+    } 
 }
