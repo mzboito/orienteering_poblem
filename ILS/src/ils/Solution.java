@@ -25,7 +25,7 @@ public class Solution {
         for(int i = 0; i < prob_dimension; i++){
             edges[i] = -1;
         } 
-        this.totalCost = 0.0;
+        this.totalCost = 0;
         this.totalScore = 0.0;        
     }
     
@@ -87,7 +87,7 @@ public class Solution {
         return alreadyInserted;
     }
     
-    public void updateCost(int d[][]){
+    public void updateCost(double d[][]){
         Double newCost = 0.0;
         for(int i = 1; i < prob_dimension; i++){
             for(int j = 1; i < prob_dimension; i++){
@@ -122,4 +122,8 @@ public class Solution {
         System.out.println();
     }
     
+    public int verifyConectedNode(int nodeLabel){
+        int connectedNode = edges[nodeLabel];
+        return connectedNode;
+    }
 }

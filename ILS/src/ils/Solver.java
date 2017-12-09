@@ -57,23 +57,36 @@ public class Solver {
     /* Tipo um hill clibing */
     public Solution localSearch(Solution bestLocal, int maxImprov){
     //adiciona n vezes, usa seed randomico pra adicionar nós, tenta maximizar o score e controlar o custo
-        Random insert = new Random(seed);
+        Random generator1 = new Random(seed);
+        int nodeNum1 = 0;
         while(maxImprov > 0){
             
-            Boolean alreadyInserted = false;
-            int randNum = insert.nextInt(p.nodes.size());
-            randNum+=1;
-            Node randNode = p.getNode(Integer.toString(randNum));
+            boolean alreadyInserted = false;
+            int nodeToInsert = generator1.nextInt(p.nodes.size()) + 1;
+            //Node nodeToInsert = p.getNode(Integer.toString(randNum1));
             
-                if(!(s.edgeAlreadyInserted(randNum, alreadyInserted))){ // não foi inserido ainda
-                    Random node = new Random(seed); //onde vai ser inserido
-                    
+            if(!(bestLocal.edgeAlreadyInserted(nodeToInsert, alreadyInserted))){ // não foi inserido ainda
+                while(!alreadyInserted){
+                    Random generator2 = new Random(seed); //onde vai ser inserido
+                    nodeNum1 = generator2.nextInt(p.nodes.size()) + 1;
+                    alreadyInserted = bestLocal.edgeAlreadyInserted(nodeToInsert, alreadyInserted);
+                }
+                
+                int nodeNum2 = s.verifyConectedNode(nodeNum1);
+                double euclDist = p.getEuclDist(nodeNum1, nodeNum2);
+                double newCost = bestLocal.getTotalCost() - euclDist; // tira o custo das arestas que não vão mais se conectar
+                
+                if(p.getEuclDist(nodeToInsert, nodeNum1) + p.getEuclDist(nodeToInsert, nodeNum2) <= bestLocal.totalCost){
+                    bestLocal.removeEdge(nodeNum1);
+                    bestLocal.removeEdge(nodeNum2);
+                    bestLocal.addEdge(nodeToInsert, nodeNum1);
+                    bestLocal.addEdge(nodeToInsert, nodeNum1);
+                    bestLocal.updateScore(p.getScoreList());
+                    bestLocal.updateCost(p.euclDist);
                 }
             }
-            
-            
-            
             maxImprov--;
+        }
         return bestLocal;
 }
     

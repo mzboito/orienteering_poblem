@@ -20,7 +20,7 @@ public class Problem {
     double cost_limit;
     ArrayList<Node> nodes;
     String starting_node;
-    int euclDist[][];
+    double euclDist[][];
 
     public Problem(String name, String comment, int dimension, double cost_limit, ArrayList<Node> nodes, String starting_node) {
         this.name = name;
@@ -99,7 +99,7 @@ public class Problem {
     }
     
     public void setDistEuclSize(int size){
-        this.euclDist = new int[size][size];
+        this.euclDist = new double[size][size];
     }
     
     public void addEuclDist(int i, int j, double x1, double x2, double y1, double y2){
