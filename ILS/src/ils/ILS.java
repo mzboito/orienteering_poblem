@@ -44,20 +44,26 @@ public class ILS {
     
     public static void main(String[] args) throws IOException {
 
-        //get from user path and seed 
+        //get from user path and seed
+        /*for(String s: args){
+            System.out.println(s);
+        }*/
+        
         String path = args[0];
         int seed = Integer.parseInt(args[1]);
         String output = args[2];
-        int maxSteps = Integer.parseInt(args[2]);
+        int maxSteps = Integer.parseInt(args[3]);
         //System.out.println(path);
+        
+        //path = "/home/mzboito/Documents/orienteering_poblem/ILS/dist/ILS.jar";
         
         //get problem
         Problem p = new ProblemFileReader().read_file(path);
         //debuggerPrint(p);
 
         Solver ils = new Solver(p, seed, maxSteps);
-        ils.exec();
-        ils.writeSolution(output);
+        //ils.exec();
+        //ils.writeSolution(output);
         
     }
     

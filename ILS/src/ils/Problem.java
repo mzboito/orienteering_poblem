@@ -56,8 +56,15 @@ public class Problem {
         return nodes;
     }
 
-    public String getStarting_node() {
-        return starting_node;
+    public Node getStarting_node() {
+        for(Node n : this.nodes){
+            System.out.println(n.getLabel());
+            if(this.starting_node.equals(n.getLabel())){
+                return n;
+            }
+        }
+        System.out.println("problema");
+        return null;
     }
     
     public void addNode(Node node) {

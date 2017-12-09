@@ -25,9 +25,14 @@ public class Solver {
         this.maxSteps = maxSteps;
         this.usedNodes = usedNodes = new ArrayList();
         this.auxNodes = new ArrayList();
+        if(p.getStarting_node() != null){
+            s.setTrivialSolution(p.getStarting_node());
+        }
+        System.out.println("sai");
     }
     
     public void exec(){
+        
         //here goes the logic
         
         
@@ -79,11 +84,6 @@ public class Solver {
     {
         return bestLocal;
     }
-
-    Solution getSolution() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 
     public void writeSolution(String output) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
