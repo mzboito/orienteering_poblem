@@ -58,8 +58,9 @@ public class ILS {
         System.out.println(maxSteps);
         //System.out.println(path);
         
-        path = "/home/mzboito/Documents/orienteering_poblem/instances/a8.oplib";
-        
+        path = "/home/mzboito/Documents/orienteering_poblem/instances/kroA200.oplib";
+        maxSteps = 10000;
+        seed = 2;
         //get problem
         Problem p = new ProblemFileReader().read_file(path);
         //debuggerPrint(p);

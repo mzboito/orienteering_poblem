@@ -31,13 +31,13 @@ public class Solver {
     
     public void exec(){ //here goes the logic
         
-        int maxImprov = 50;
+        int maxImprov = 30;
         int maxIt = this.maxSteps;
         
         Solution bestLocal = s;
         
         while(maxIt > 0){
-            System.out.println("Iteration number " + maxIt);
+            //System.out.println("Iteration number " + maxIt);
             Solution newSol = localSearch(bestLocal,maxImprov);
             bestLocal = acceptSolution(bestLocal, newSol);
             bestLocal = perturbSolution(bestLocal);
@@ -146,7 +146,7 @@ public class Solver {
         //criar uma nova solucao removendo os indices aleatorios
         while(N > 0){
             randomNum = generator.nextInt((max - min) + 1) + min; //generates a number
-            System.out.printf("Entering with rand num %d \n", randomNum);
+            //System.out.printf("Entering with rand num %d \n", randomNum);
             if(randomNum != Integer.parseInt(p.starting_node)){
                 int edges[] = bestLocal.edges;
                 int a1 = -1;

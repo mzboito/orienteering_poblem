@@ -37,7 +37,7 @@ public class ProblemFileReader {
         boolean coord_flag = false;
         boolean score_flag = false;
         boolean depot_flag = false;
-
+        
         for(int i = 0; i < lines.size(); i++){
             //System.out.println(lines.get(i));
             if(lines.get(i).startsWith("NAME")){
@@ -45,7 +45,7 @@ public class ProblemFileReader {
                 p.setName(name);
             }else{
             if(lines.get(i).startsWith("COMMENT")){
-                String comment = lines.get(i).split(" : ")[1];
+                String comment = lines.get(i).split(": ")[1];
                 p.setComment(comment);
             }else{
             if(lines.get(i).startsWith("DIMENSION")){
@@ -94,15 +94,15 @@ public class ProblemFileReader {
                 break;
             }}}}}}}}}}}
         }
-        
+        System.out.println(p.nodes.size()+1);
         p.setDistEuclSize(p.nodes.size()+1);
-                  
         for(int i=1; i<=p.nodes.size(); i++){
             for(int j=1; j<=p.nodes.size(); j++){
+                System.out.printf("(%d,%d)\n",i,j);
                 p.addEuclDist(i, j, p.nodes.get(i-1).x, p.nodes.get(j-1).x, p.nodes.get(i-1).y, p.nodes.get(j-1).y);
             }
         }
-
+        System.out.println("mazoq");
            return p;
     }
     
