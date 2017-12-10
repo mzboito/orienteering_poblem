@@ -145,7 +145,7 @@ public class Solver {
         //bestLocal.addEdge(5, 1);
         //criar uma nova solucao removendo os indices aleatorios
         while(N > 0){
-            randomNum = generator.nextInt((max - min) + 1) + min; //generates a number
+            randomNum = generator.nextInt(bestLocal.prob_dimension) ; //generates a number
             //System.out.printf("Entering with rand num %d \n", randomNum);
             if(randomNum != Integer.parseInt(p.starting_node)){
                 int edges[] = bestLocal.edges;
