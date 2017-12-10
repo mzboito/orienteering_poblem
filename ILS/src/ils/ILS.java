@@ -53,12 +53,12 @@ public class ILS {
         //path = "C:/Ble/UFRGS/CIC/5SEMESTRE/Otimização/instances/a8.oplib";
         int seed = Integer.parseInt(args[1]);
         String output = args[2];
-        System.out.print(output);
+        //System.out.print(output);
         int maxSteps = Integer.parseInt(args[3]);
         System.out.println(maxSteps);
         //System.out.println(path);
         
-        path = "/home/mzboito/Documents/orienteering_poblem/instances/kroA200.oplib";
+        path = "/home/mzboito/Documents/orienteering_poblem/instances/lin105.oplib";
         maxSteps = 10000;
         seed = 2;
         //get problem
