@@ -20,7 +20,7 @@ public class ILS {
      * @param args the command line arguments
      */
     
-    public void debuggerPrint(Problem p){
+    public static void debuggerPrint(Problem p){
         /* Imprimir o que foi lido no arquivo referente ao node que é o que eu preciso */
         ArrayList<Node> nodes = p.getNodes();
         
@@ -52,22 +52,22 @@ public class ILS {
         String path = args[0];
         //path = "C:/Ble/UFRGS/CIC/5SEMESTRE/Otimização/instances/a8.oplib";
         int seed = Integer.parseInt(args[1]);
-        String output = args[2];
-        //System.out.print(output);
-        int maxSteps = Integer.parseInt(args[3]);
-        System.out.println(maxSteps);
+        int maxSteps = Integer.parseInt(args[2]);
+        //System.out.println(maxSteps);
         //System.out.println(path);
         
-        path = "/home/mzboito/Documents/orienteering_poblem/instances/lin105.oplib";
-        maxSteps = 10000;
-        seed = 2;
+        //path = "/home/mzboito/Documents/orienteering_poblem/instances/ber25.oplib";
+        //maxSteps = 10000;
+        //seed = 2;
         //get problem
         Problem p = new ProblemFileReader().read_file(path);
         //debuggerPrint(p);
-
         Solver ils = new Solver(p, seed, maxSteps);
+        long startTime = System.currentTimeMillis();
         ils.exec();
-        //ils.writeSolution(output);   
+        long stopTime = System.currentTimeMillis();
+        double elapsedTime = (stopTime - startTime)/1000.0; //seconds
+        ils.showSolution(elapsedTime);   
     } 
-        //ils.writeSolution(output);
+
 }

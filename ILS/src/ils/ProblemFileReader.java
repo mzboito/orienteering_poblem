@@ -26,8 +26,8 @@ public class ProblemFileReader {
         String line = br.readLine();
         ArrayList<String> lines = new ArrayList();
         while (line != null) {
-            line = br.readLine();
             lines.add(line);
+            line = br.readLine(); 
         }
         if(lines.size() < 6){
             return null; //the file is too short
@@ -41,7 +41,8 @@ public class ProblemFileReader {
         for(int i = 0; i < lines.size(); i++){
             //System.out.println(lines.get(i));
             if(lines.get(i).startsWith("NAME")){
-                String name = lines.get(i).split(" : ")[1];
+                String name = lines.get(i).split(": ")[1];
+                //System.out.println(name);
                 p.setName(name);
             }else{
             if(lines.get(i).startsWith("COMMENT")){
@@ -53,7 +54,7 @@ public class ProblemFileReader {
                 p.setDimension(dimension);
             }else{
             if(lines.get(i).startsWith("COST_LIMIT")){
-                Double cost_limit = Double.parseDouble(lines.get(i).split(" : ")[1]);
+                Double cost_limit = Double.parseDouble(lines.get(i).split(": ")[1]);
                 p.setCost_limit(cost_limit);
             }else{
             if(lines.get(i).startsWith("NODE_COORD_SECTION")){

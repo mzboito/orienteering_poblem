@@ -5,6 +5,11 @@
  */
 package ils;
 
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -45,10 +50,8 @@ public class Solver {
             
         }
         this.s = bestLocal;
-        System.out.println(s.totalScore);
         s.updateCost(p.euclDist);
-        System.out.println(s.totalCost);
-        s.print_edges();
+        s.updateScore(p.getScoreList());
     }
     
     public Solution acceptSolution(Solution bestLocal, Solution newSol){
@@ -177,8 +180,12 @@ public class Solver {
         return bestLocal;
     }
 
-    public void writeSolution(String output) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void showSolution(double time){
+        System.out.printf("ILS SOLUTION FOR %s\n", p.name);
+        System.out.printf("FOUND VALUE %f\n", s.totalScore);
+        System.out.printf("TOTAL COST %f\n", s.totalCost);
+        System.out.printf("TIME (S): %f\n", time);
+        //s.print_edges();
     }
     
 }
